@@ -22,15 +22,31 @@ void AFPSGameMode::CompleteMission(APawn* InsigatorPawn)
 	{
 		InsigatorPawn->DisableInput(nullptr);
 		
-		AActor* EndGameViewTarget;
-
-		UGameplayStatics::
-		
-		APlayerController* PC = Cast<APlayerController>(InsigatorPawn->GetController());
-		if (PC)
+		if (SpectatingViewpointClass)
 		{
-			PC->SetViewTargetWithBlend(nullptr, 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+			TArray<AActor*> ReturnedActors;
+			UGameplayStatics::GetAllActorsOfClass(this, SpectatingViewpointClass, ReturnedActors);
+
+
+			//change viewtargets if any valid actor found
+			
+			if (ReturnedActors.Num() > 0)
+			{
+				AActor* EndGameViewTarget = ReturnedActors[0];
+
+				APlayerController* PC = Cast<APlayerController>(InsigatorPawn->GetController());
+				if (PC)
+				{
+					PC->SetViewTargetWithBlend(nullptr, 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+				}
+			}
 		}
+		else 
+		{
+			UE_LOG(LogTemp, Warning, TEXT("SpectatingViewpointClass is nullptr. Please update Gamemode class with valid"));
+		}
+
+		
 	}
 	OnMissionCompleted(InsigatorPawn);
 	
