@@ -3,6 +3,7 @@
 #include "FPSGameMode.h"
 #include "FPSHUD.h"
 #include "FPSCharacter.h"
+#include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
 AFPSGameMode::AFPSGameMode()
@@ -20,7 +21,16 @@ void AFPSGameMode::CompleteMission(APawn* InsigatorPawn)
 	if (InsigatorPawn)
 	{
 		InsigatorPawn->DisableInput(nullptr);
+		
+		AActor* EndGameViewTarget;
 
+		UGameplayStatics::
+		
+		APlayerController* PC = Cast<APlayerController>(InsigatorPawn->GetController());
+		if (PC)
+		{
+			PC->SetViewTargetWithBlend(nullptr, 0.5f, EViewTargetBlendFunction::VTBlend_Cubic);
+		}
 	}
 	OnMissionCompleted(InsigatorPawn);
 	
