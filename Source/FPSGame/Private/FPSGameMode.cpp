@@ -3,7 +3,7 @@
 #include "FPSGameMode.h"
 #include "FPSHUD.h"
 #include "FPSCharacter.h"
-#include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
+#include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"
 
 AFPSGameMode::AFPSGameMode()
@@ -22,9 +22,9 @@ void AFPSGameMode::CompleteMission(APawn* InsigatorPawn)
 	{
 		InsigatorPawn->DisableInput(nullptr);
 		
-		//AActor* EndGameViewTarget;
+		AActor* EndGameViewTarget;
 
-		//UGameplayStatics::
+		UGameplayStatics::
 		
 		APlayerController* PC = Cast<APlayerController>(InsigatorPawn->GetController());
 		if (PC)
