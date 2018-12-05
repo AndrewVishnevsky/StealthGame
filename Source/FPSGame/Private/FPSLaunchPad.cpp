@@ -40,7 +40,7 @@ void AFPSLaunchPad::OverlapLaunchPad(UPrimitiveComponent* OverlappedComponent, A
 		OtherCharacter->LaunchCharacter(LaunchVelocity, true, true);
 
 		// Spawn FX
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ActivateLaunchEffect, GetActorLocation());
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ActivateLaunchPadEffect, GetActorLocation());
 	}
 	// Did not overlap a player, so check if it's a physics simulating actor we can launch
 	else if (OtherComp && OtherComp->IsSimulatingPhysics())
@@ -48,6 +48,6 @@ void AFPSLaunchPad::OverlapLaunchPad(UPrimitiveComponent* OverlappedComponent, A
 		OtherComp->AddImpulse(LaunchVelocity, NAME_None, true);
 
 		// Spawn FX
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ActivateLaunchEffect, GetActorLocation());
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ActivateLaunchPadEffect, GetActorLocation());
 	}
 }
