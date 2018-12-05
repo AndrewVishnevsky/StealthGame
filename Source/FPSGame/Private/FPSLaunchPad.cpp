@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 
+
 // Sets default values
 AFPSLaunchPad::AFPSLaunchPad()
 {
@@ -17,12 +18,13 @@ AFPSLaunchPad::AFPSLaunchPad()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	MeshComp->SetupAttachment(RootComponent);
 
+	// Bind to Event
 	OverlapComp->OnComponentBeginOverlap.AddDynamic(this, &AFPSLaunchPad::OverlapLaunchPad);
-
 
 	LaunchStrength = 1500;
 	LaunchPitchAngle = 35.0f;
 }
+
 
 void AFPSLaunchPad::OverlapLaunchPad(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -49,7 +51,3 @@ void AFPSLaunchPad::OverlapLaunchPad(UPrimitiveComponent* OverlappedComponent, A
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ActivateLaunchPadEffect, GetActorLocation());
 	}
 }
-
-
-
-
